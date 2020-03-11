@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view></router-view>
+    <TabBar>
+      <!-- 父传子 -->
+      <TabBarItem 
+        v-for="tb in tabbars" 
+        :key="tb.name" 
+        :name="tb.name" 
+        :icon="tb.icon"
+        :on_icon="tb.on_icon"
+        :url="tb.url"
+      ></TabBarItem>
+    </TabBar>
   </div>
 </template>
-
+<script>
+// 导入菜单配置
+import tbConfig from "@/config/tabbar.js"
+import TabBar from "@/components/tabbar/TabBar.vue"
+import TabBarItem from "@/components/tabbar/TabBarItem.vue"
+export default {
+  name:'App',
+  data(){
+    return {
+      tabbars:tbConfig
+    }
+  },
+  components:{
+    TabBar,
+    TabBarItem
+  }
+}
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  /* 固定语法。在style中引入css */
+  @import "./assets/css/base.css";
 
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
